@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Dirty Racers.sln"
+    "dotnet.defaultSolution": "DirtyRacers.sln"
 }

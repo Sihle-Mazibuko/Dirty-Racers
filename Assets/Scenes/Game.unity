@@ -7228,7 +7228,7 @@ GameObject:
   - component: {fileID: 1665839853}
   - component: {fileID: 1665839852}
   m_Layer: 0
-  m_Name: EventSyste
+  m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
