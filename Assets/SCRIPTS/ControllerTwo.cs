@@ -22,18 +22,18 @@ public class ControllerTwo : MonoBehaviour
      WheelCollider[] wheels = new WheelCollider[4];
      GameObject[] wheelMesh  = new GameObject[4];
     [SerializeField] float carTorque;
-    [SerializeField] float steeringMax = 4;
+    //[SerializeField] float steeringMax = 4;
     [SerializeField] float brakePower;
     public HandleInputs inputHandler;
 
     //ENGINE
-    public AnimationCurve enginePower;
-    float wheelsRPM;
+    //public AnimationCurve enginePower;
+    //float wheelsRPM;
     [SerializeField] float totalPower;
-    float smoothTime = .1f;
-    public float engineRPM;
-    public float[] gears;
-    int gearNum = 0;
+    //float smoothTime = .1f;
+    //public float engineRPM;
+    //public float[] gears;
+    //int gearNum = 0;
 
 
     //TURNING
@@ -55,7 +55,7 @@ public class ControllerTwo : MonoBehaviour
     //DRIFTING
     WheelFrictionCurve forwardFriction, sidewaysFriction;
     float tempo, handBrakeFriction;
-    [SerializeField] float handBrakeFrictionMultiplier = 2f;
+    //[SerializeField] float handBrakeFrictionMultiplier = 2f;
     float driftFactor ;
 
     //EFFECTS

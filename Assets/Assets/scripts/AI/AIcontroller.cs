@@ -44,7 +44,7 @@ public class AIcontroller : MonoBehaviour{
     private WheelCollider[] wheels = new WheelCollider[4];
     private GameObject[] wheelMesh = new GameObject[4];
     private GameObject centerOfMass;
-    private Rigidbody rigidbody;
+    private Rigidbody rb;
 
     //car Shop Values
     public int carPrice;
@@ -148,11 +148,11 @@ public class AIcontroller : MonoBehaviour{
 
         if (vertical != 0)
         {
-            rigidbody.drag = 0.005f;
+            rb.drag = 0.005f;
         }
         if (vertical == 0)
         {
-            rigidbody.drag = 0.1f;
+            rb.drag = 0.1f;
         }
         totalPower = 3.6f * enginePower.Evaluate(engineRPM) * (vertical);
 
@@ -245,7 +245,7 @@ public class AIcontroller : MonoBehaviour{
             }
         }
 
-        KPH = rigidbody.velocity.magnitude * 3.6f;
+        KPH = rb.velocity.magnitude * 3.6f;
 
 
     }
@@ -314,7 +314,7 @@ public class AIcontroller : MonoBehaviour{
     {
 
         CarEffects = GetComponent<carEffects>();
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         wheelColliders = GameObject.Find("wheelColliders");
         wheelMeshes = GameObject.Find("wheelMeshes");
         wheels[0] = wheelColliders.transform.Find("0").gameObject.GetComponent<WheelCollider>();
@@ -332,13 +332,13 @@ public class AIcontroller : MonoBehaviour{
         nodes = waypoints.nodes;
 
         centerOfMass = GameObject.Find("mass");
-        rigidbody.centerOfMass = centerOfMass.transform.localPosition;
+        rb.centerOfMass = centerOfMass.transform.localPosition;
     }
 
     private void addDownForce()
     {
 
-        rigidbody.AddForce(-transform.up * DownForceValue * rigidbody.velocity.magnitude);
+        rb.AddForce(-transform.up * DownForceValue * rb.velocity.magnitude);
 
     }
 

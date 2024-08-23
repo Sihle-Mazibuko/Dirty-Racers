@@ -7590,6 +7590,63 @@ RectTransform:
   m_AnchoredPosition: {x: 2.5, y: 0}
   m_SizeDelta: {x: -5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &575275899123367918
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3235478538665664192, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_Name
+      value: Waypoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529924972102850748, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 111.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529924972102850748, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 30.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529924972102850748, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 126.54817
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529924972102850748, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529924972102850748, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529924972102850748, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529924972102850748, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529924972102850748, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529924972102850748, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529924972102850748, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc601e27e466b8041b70a96fb04ff61a, type: 3}
 --- !u!4 &577755436513080176
 Transform:
   m_ObjectHideFlags: 0
@@ -9712,50 +9769,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drive: 2
   carTorque: 4500
-  steeringMax: 8
   brakePower: 1750
   inputHandler: {fileID: 0}
-  enginePower:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 3000
-      value: 200
-      inSlope: 0.0035243079
-      outSlope: 0.0035243079
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.23593774
-      outWeight: 0.08735248
-    - serializedVersion: 3
-      time: 7509.8916
-      value: 150
-      inSlope: 0.0048472704
-      outSlope: 0.0048472704
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.047576517
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   totalPower: 2200
-  engineRPM: 0
-  gears:
-  - 2.5
-  - 1.5
-  - 1
-  - 0.9
-  - 0.4
   radius: 6
   kmph: 0
   slip:
@@ -9763,7 +9779,6 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  handBrakeFrictionMultiplier: 2.5
   toggleSmoke: 0
   nosValue: 0
   nosFlag: 0
@@ -10233,3 +10248,4 @@ SceneRoots:
   - {fileID: 80327139}
   - {fileID: 1665839854}
   - {fileID: 1282702084}
+  - {fileID: 575275899123367918}
