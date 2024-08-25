@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TrackWayPoints : MonoBehaviour
 {
-    public Color lineColour = Color.magenta;
-    [Range(1f, 2f)] public float sphereRadius;
+    public Color lineColour;
+    [Range(1,2)] public float sphereRadius;
     public List<Transform> nodes = new List<Transform>();
 
     private void OnDrawGizmos()
