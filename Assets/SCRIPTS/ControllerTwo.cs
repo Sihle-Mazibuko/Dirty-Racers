@@ -50,7 +50,7 @@ public class ControllerTwo : MonoBehaviour
 
 
     //NITROS BOOSTER
-    float thrust = 10000;
+    float thrust = 50;
 
     //DRIFTING
     WheelFrictionCurve forwardFriction, sidewaysFriction;
@@ -84,6 +84,7 @@ public class ControllerTwo : MonoBehaviour
         AdjustTraction();
         CheckWheelSpin();
         ActivateNOS();
+        CheckHighSpeedBraking();
         //CalcEnginePower(); THIS DOESNT WORK
     }
 
@@ -134,7 +135,14 @@ public class ControllerTwo : MonoBehaviour
         kmph = rb.velocity.magnitude * 3.6f;
 
         float maxSpeed = 153f;
-        if(kmph > maxSpeed)
+        float absoluteMaxSpeed = 185f;
+
+        if (kmph > absoluteMaxSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * (absoluteMaxSpeed / 3.6f);
+        }
+
+        if(kmph > maxSpeed  && !inputHandler.boosting)
         {
             for (int i = 0; i < wheels.Length; i++)
             {
@@ -175,10 +183,10 @@ public class ControllerTwo : MonoBehaviour
 
       
 
-        //if (inputHandler.boosting && kmph <= 175)
-        //{
-        //    rb.AddForce(-Vector3.forward * thrust);
-        //}
+        if (inputHandler.boosting && kmph < absoluteMaxSpeed)
+        {
+            rb.AddForce(-Vector3.forward * thrust);
+        }
 
     }
 
@@ -290,35 +298,68 @@ public class ControllerTwo : MonoBehaviour
     {
         bool isDrifting = false;
 
-        if (inputHandler.handBrake)
+        for (int i = 2; i < 4; i++)
+        {
+            WheelHit wheelHit;
+            wheels[i].GetGroundHit(out wheelHit);
+
+            // Check for significant sideways slip
+            if (Mathf.Abs(wheelHit.sidewaysSlip) >= 0.3f)
+            {
+                isDrifting = true;
+            }
+            else
+            {
+                wheels[i].brakeTorque = 0;
+            }
+        }
+
+        // Trigger smoke only when there's significant sideways slip
+        toggleSmoke = isDrifting;
+    }
+
+    void CheckHighSpeedBraking()
+    {
+        if (kmph > 80f) // Adjust the speed threshold as needed
         {
             for (int i = 2; i < 4; i++)
             {
                 WheelHit wheelHit;
                 wheels[i].GetGroundHit(out wheelHit);
 
-                if (Mathf.Abs(wheelHit.sidewaysSlip) >= .3f || Mathf.Abs(wheelHit.forwardSlip) >= -0.3f) 
-                { 
-
-                    isDrifting = true;
-                    wheels[i].brakeTorque = brakePower;
-                }
-                else
+                // Trigger smoke if there's significant forward slip during braking
+                if (Mathf.Abs(wheelHit.forwardSlip) > 0.5f && inputHandler.vertical < 0)
                 {
-                    wheels[i].brakeTorque = 0;
+                    toggleSmoke = true;
                 }
+            }
+        }
+    }
 
+    void HandleSmokeEffect(bool isDrifting)
+    {
+        if (isDrifting && !nosFlag) // Ensure NOS isn't active when drifting
+        {
+            // Play smoke particle effects for all wheels (or specific wheels)
+            foreach (var smokeParticle in nosParticle)
+            {
+                if (!smokeParticle.isPlaying)
+                {
+                    smokeParticle.Play();
+                }
             }
         }
         else
         {
-            for (int i = 2; i < 4; i++) 
+            // Stop smoke particle effects
+            foreach (var smokeParticle in nosParticle)
             {
-                wheels[i].brakeTorque = 0; 
+                if (smokeParticle.isPlaying)
+                {
+                    smokeParticle.Stop();
+                }
             }
         }
-
-        toggleSmoke = isDrifting;
     }
 
     public void ActivateNOS()

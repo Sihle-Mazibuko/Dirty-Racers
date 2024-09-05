@@ -15,7 +15,7 @@ public class CamFollow : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Bot");
         child = player.transform.Find("CamFollow").gameObject;
         pControl = player.GetComponent<ControllerTwo>();
         defaultFOV = Camera.main.fieldOfView;

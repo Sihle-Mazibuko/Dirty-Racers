@@ -6,17 +6,23 @@ public class KartFX : MonoBehaviour
 {
     ControllerTwo pcontrol;
     [SerializeField] ParticleSystem[] smoke;
+    [SerializeField] TrailRenderer[] tireMarks;
     bool smokeFlag = false;
     bool isAcceleratingFromStop = false;
+    bool tireMarksFlag;
+    HandleInputs handleInputs;
+
 
     private void Start()
     {
         pcontrol = gameObject.GetComponent<ControllerTwo>();
+        handleInputs = gameObject.GetComponent<HandleInputs>();
     }
 
     private void FixedUpdate()
     {
         HandleSmokeEffects();
+        CheckDrift();
     }
 
     private void HandleSmokeEffects()
@@ -74,5 +80,48 @@ public class KartFX : MonoBehaviour
         {
             smoke[i].Stop();
         }
+    }
+
+    void CheckDrift()
+    {
+        if (handleInputs.handBrake)
+        {
+            StartEmitter();
+        }
+        else
+        {
+            StopEmitter();
+        }
+    }
+
+    void StartEmitter()
+    {
+        if (tireMarksFlag)
+        {
+            return;
+        }
+
+        foreach (var skidMark in tireMarks)
+        {
+            skidMark.emitting = true;
+        }
+
+        tireMarksFlag = true;
+    }
+
+    void StopEmitter()
+    {
+        if (!tireMarksFlag)
+        {
+            return;
+        }
+
+        foreach (var skidMark in tireMarks)
+        {
+            skidMark.emitting = false;
+        }
+
+        tireMarksFlag = false;
+
     }
 }

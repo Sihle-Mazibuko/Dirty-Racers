@@ -24,27 +24,44 @@ public class HandleInputs : MonoBehaviour
 
     private void Awake()
     {
+        if (gameObject.CompareTag("Bot"))
+        {
+            driveController = driverType.AI;
+        }
+        else
+        {
+            driveController = driverType.keyboard; 
+        }
+
+
         wayPoints = GameObject.FindGameObjectWithTag("path").GetComponent<trackWaypoints>();
         nodes = wayPoints.nodes;
+
     }
 
     private void FixedUpdate()
     {
 
+
+
         CalcWayPointDistance();
 
-        switch (driveController)
+
+        if(driveController == driverType.AI)
         {
-            case driverType.AI: AIDriver(); break;
-            case driverType.keyboard: KeyBoardDriver(); break;
-            default: break;
+            AIDriver();
         }
+        else if(driveController == driverType.keyboard)
+        {
+            KeyBoardDriver();
+        }
+
     }
 
 
     void AIDriver()
     {
-        vertical = .5f;
+        vertical = .3f;
         AISteer();
     }
 
@@ -67,6 +84,13 @@ public class HandleInputs : MonoBehaviour
 
     void CalcWayPointDistance()
     {
+
+        if (nodes == null || nodes.Count == 0)
+        {
+            Debug.LogError("No waypoints available to calculate distance.");
+            return;
+        }
+
         Vector3 position = gameObject.transform.position;
         float distance = Mathf.Infinity;
 
@@ -100,10 +124,10 @@ public class HandleInputs : MonoBehaviour
         horizontal = (relative.x / relative.magnitude) * steerForce;
     }
 
-    private void OnDrawGizmos()
-    {
+//    private void OnDrawGizmos()
+//    {
         
-            Gizmos.DrawWireSphere(currentWayPoint.position, 3);
+//            Gizmos.DrawWireSphere(currentWayPoint.position, 3);
         
-    }
+//    }
 }
